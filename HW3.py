@@ -1,6 +1,6 @@
-# Name:
-# Student ID:
-# Email:
+# Name: Anna Browne
+# Student ID: 56505997
+# Email: aobrowne@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
 # If you worked with generative AI also add a statement for how you used it.
 # e.g.:
@@ -26,6 +26,9 @@ class CouponDispenser:
     """
 
     def __init__(self, coupon_cards):
+        self.coupon_cards = coupon_cards
+        self.customer_roster = []
+        self.issued_indices = []
         """
         Initialize a new CouponDispenser object.
 
@@ -36,6 +39,11 @@ class CouponDispenser:
         pass
 
     def __str__(self):
+        if len(self.coupon_cards) == 0:
+            return ""
+        else:
+            return  f"{"|".join(self.coupon_cards)}"
+        
         """
         Return a single string with all coupons in coupon_cards joined by pipes ('|').
         If coupon_cards is empty, return an empty string "".
@@ -64,6 +72,16 @@ class CouponDispenser:
         pass
 
     def distribute_session(self):
+        round_number = 1
+
+        user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
+        self.user_input = user_input
+        for name in self.user_input.split(","):
+            self.customer_roster.append(name)
+        for customer in self.customer_roster:
+            if customer == "exit":
+                print("Goodbye!")
+                break
         """
         Run the "coupon dispenser" session.
 
