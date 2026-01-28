@@ -55,6 +55,15 @@ class CouponDispenser:
         pass
 
     def issue_coupon(self, name):
+       if len(self.coupon_cards) == 0:
+            return "The box is empty."
+       for name in user_input.split(","):
+            if name in self.customer_roster:
+                return f"That name already has a coupon: {self.coupon_cards[self.issued_indices[name.index()]]}"
+            else:
+                coupon_index = random(0, len(self.coupon_cards))
+                self.customer_roster.append(name)
+                self.issued_indices.append(self.coupon_cards[coupon_index])
         """
         Assign name with a random coupon. If name is already assigned a coupon, return it.
         If the list coupon_cards is empty, return:
