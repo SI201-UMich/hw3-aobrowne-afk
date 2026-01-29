@@ -53,15 +53,14 @@ class CouponDispenser:
         # TODO: Implement per instructions
 
     def issue_coupon(self, name):
-       if len(self.coupon_cards) == 0:
+        if len(self.coupon_cards) == 0:
             return "The box is empty."
-       for person in name.split(","):
-            if person in self.customer_roster:
-                return f"That name already has a coupon: {self.coupon_cards[self.issued_indices[person.index()]]}"
-            else:
-                coupon_index = random(0, len(self.coupon_cards))
-                self.customer_roster.append(person)
-                self.issued_indices.append(self.coupon_cards[coupon_index])
+        if name in self.customer_roster:
+            return f"That name already has a coupon: {self.coupon_cards[self.issued_indices[name.index()]]}"
+        else:
+            coupon_index = random(0, len(self.coupon_cards))
+            self.customer_roster.append(name)
+            self.issued_indices.append(self.coupon_cards[coupon_index])
         """
         Assign name with a random coupon. If name is already assigned a coupon, return it.
         If the list coupon_cards is empty, return:
@@ -93,7 +92,7 @@ class CouponDispenser:
                 stripped_name = name.strip()
                 if stripped_name == "":
                     continue
-                print(issue_coupon(stripped_name))
+                print(stripped_name.issue_coupon())
         """
         Run the "coupon dispenser" session.
 
@@ -161,10 +160,9 @@ def main():
     ]
 
     # Uncomment the lines below as you implement each function.
-    # box = CouponDispenser(coupon_cards)
-    # box.distribute_session()
+    box = CouponDispenser(coupon_cards)
+    box.distribute_session()
     # box.tally_distribution()
-    pass
 
 
 # -----------------------
