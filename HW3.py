@@ -1,12 +1,12 @@
 # Name: Anna Browne
 # Student ID: 56505997
 # Email: aobrowne@umich.edu
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Who or what you worked with on this homework (including generative AI like ChatGPT): office hours with Sarah Stec and ChatGPT
 # If you worked with generative AI also add a statement for how you used it.
-# e.g.:
-# Asked ChatGPT hints for debugging and suggesting the general structure of the code
+# I was having trouble with creating a round counter in the distribute_session function. I asked ChatGPT "Without telling me how to fix it, can you tell me what's wrong with my round counter?" This was the only time I used it.
 # Did your use of GenAI on this assignment align with your goals and guidelines in 
 #    your Gen AI contract? If not, why?
+# Yes because I tried to figure out my problem on my own several times before turning to AI. I also asked ChatGPT to just tell me what was wrong with my code, not fix it for me.
 
 import random
 import io
@@ -14,16 +14,7 @@ from contextlib import redirect_stdout
 
 
 class CouponDispenser:
-    """
-    CouponDispenser manages a box of coupon cards and assigns one coupon
-    to each unique name entered by the user during a session.
 
-    Required attributes (initialized in __init__):
-      - coupon_cards: list[str]              # all possible coupon texts
-      - customer_roster: list[str]             # names in order of assignment
-      - issued_indices: list[int]           # indices into coupon_cards aligned to customer_roster
-
-    """
 
     def __init__(self, coupon_cards):
         self.coupon_cards = coupon_cards
@@ -78,16 +69,14 @@ class CouponDispenser:
         # TODO: Implement per instructions
 
     def distribute_session(self):
+        round_number = 0
         while True:
-            round_number = 1
-
-            user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
             round_number += 1
-            self.user_input = user_input
-            if self.user_input == "exit":
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
+            if user_input == "exit":
                 print("Goodbye!")
                 break
-            elif self.user_input == "show":
+            elif user_input == "show":
                 for i in range(len(self.customer_roster)):
                     print(f"{self.customer_roster[i]}: {self.coupon_cards[self.issued_indices[i]]}")
             else:
@@ -151,13 +140,7 @@ class CouponDispenser:
 
 
 def main():
-    """
-    Driver function:
-      - Define the coupon_cards list (example coupons below)
-      - Create a CouponDispenser
-      - Start the interaction via distribute_session()
-      - After exit, call tally_distribution() to print the distribution in the terminal
-    """
+
     coupon_cards = [
         "10% off",
         "Free small coffee",
@@ -165,7 +148,6 @@ def main():
         "Free extra espresso shot",
     ]
 
-    # Uncomment the lines below as you implement each function.
     box = CouponDispenser(coupon_cards)
     box.distribute_session()
     box.tally_distribution()
@@ -448,5 +430,5 @@ def test():
 
 if __name__ == "__main__":
     main()
-    # test()
+    test()
 
